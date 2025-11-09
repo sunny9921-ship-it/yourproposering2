@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 상세</title>
+
+  <!-- Pretendard 글꼴 -->
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+      padding: 16px;
+      background-color: #fdfdfd;
+      color: #333;
+    }
+
+    .product-detail {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .product-detail img {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      margin-bottom: 16px;
+    }
+
+    .product-detail h2 {
+      font-size: 22px;
+      margin: 10px 0 8px 0;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .product-price {
+      font-size: 18px;
+      color: #c49b63;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .description {
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    /* 옵션 영역 */
+    .options {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .options select, .options input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    /* 버튼 */
+    button {
+      padding: 12px;
+      border: none;
+      background-color: #c49b63;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 10px;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #a77f4d;
+    }
+
+    @media (max-width: 480px) {
+      .product-detail img {
+        width: 100%;
+      }
+      .product-detail h2 {
+        font-size: 20px;
+      }
+      .product-price {
+        font-size: 16px;
+      }
+      .description {
+        font-size: 15px;
+      }
+      .options select, .options input[type="number"] {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-detail">
+    <img id="productImage" src="" alt="상품 이미지">
+    <h2 id="productTitle">상품명</h2>
+    <p class="product-price" id="productPrice">₩0</p>
+    <div class="description">
+      <p id="productText">상품 상세 설명이 여기에 표시됩니다.</p>
+    </div>
+
+    <!-- 옵션 선택 -->
+    <div class="options">
+      <label for="optionSelect">옵션 선택:</label>
+      <select id="optionSelect">
+         <option value="옵션1">7호</option>
+         <option value="옵션2">8호</option>
+         <option value="옵션3">9호</option>
+         <option value="옵션4">10호</option>
+         <option value="옵션5">11호</option>
+         <option value="옵션6">12호</option>
+         <option value="옵션7">13호</option>
+         <option value="옵션8">14호</option>
+         <option value="옵션9">15호</option>
+         <option value="옵션10">16호</option>
+         <option value="옵션11">17호</option>
+         <option value="옵션12">18호</option>
+</select>
+
+
+      <label for="quantityInput">수량:</label>
+      <input type="number" id="quantityInput" value="1" min="1">
+    </div>
+
+    <!-- 버튼 -->
+    <button onclick="addToCart()">장바구니에 추가</button>
+    <button onclick="goBack()">목록으로 돌아가기</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || '1';
+
+    // 12개 상품 데이터 (placeholder 이미지 사용)
+    const products = {
+      1:{title:'럭셔리 향수 1', price:'₩120,000', text:'럭셔리 향수 1 상세 설명입니다.', img:'images/p1.png'},
+      2:{title:'럭셔리 향수 2', price:'₩125,000', text:'럭셔리 향수 2 상세 설명입니다.', img:'images/p2.png'},
+      3:{title:'럭셔리 향수 3', price:'₩130,000', text:'럭셔리 향수 3 상세 설명입니다.', img:'images/p3.jpg'},
+      4:{title:'럭셔리 향수 4', price:'₩135,000', text:'럭셔리 향수 4 상세 설명입니다.', img:'images/p4.jpg'},
+      5:{title:'럭셔리 향수 5', price:'₩140,000', text:'럭셔리 향수 5 상세 설명입니다.', img:'images/p5.jpg'},
+      6:{title:'럭셔리 향수 6', price:'₩145,000', text:'럭셔리 향수 6 상세 설명입니다.', img:'images/p6.jpg'},
+      7:{title:'럭셔리 향수 7', price:'₩150,000', text:'럭셔리 향수 7 상세 설명입니다.', img:'images/p7.jpg'},
+      8:{title:'럭셔리 향수 8', price:'₩155,000', text:'럭셔리 향수 8 상세 설명입니다.', img:'images/p8.jpg'},
+      9:{title:'럭셔리 향수 9', price:'₩160,000', text:'럭셔리 향수 9 상세 설명입니다.', img:'images/p9.jpg'},
+      10:{title:'럭셔리 향수 10', price:'₩165,000', text:'럭셔리 향수 10 상세 설명입니다.', img:'images/p10.jpg'},
+      11:{title:'럭셔리 향수 11', price:'₩170,000', text:'럭셔리 향수 11 상세 설명입니다.', img:'images/p11.jpg'},
+      12:{title:'럭셔리 향수 12', price:'₩175,000', text:'럭셔리 향수 12 상세 설명입니다.', img:'images/p12.jpg'}
+    };
+
+const p = products[id] || products[1];
+    document.getElementById('productImage').src = p.img;
+    document.getElementById('productTitle').innerText = p.title;
+    document.getElementById('productPrice').innerText = p.price;
+    document.getElementById('productText').innerText = p.text;
+
+    function goBack(){
+      window.history.back();
+    }
+
+    function addToCart(){
+      const option = document.getElementById('optionSelect').value;
+      const quantity = document.getElementById('quantityInput').value;
+      alert(`${p.title} (${option}) ${quantity}개가 장바구니에 추가되었습니다.`);
+      // 실제 장바구니 기능은 서버/로컬스토리지 연동 필요
+    }
+  </script>
+
+</body>
+</html>
+

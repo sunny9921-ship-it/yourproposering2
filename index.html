@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 목록</title>
+
+  <!-- Pretendard 글꼴 -->
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🔹 기본 스타일 */
+    body {
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfdfd;
+      color: #333;
+    }
+
+    /* 🔹 상단 메뉴바 */
+    .navbar {
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    .navbar li {
+      margin: 0 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .navbar li:hover {
+      color: #c49b63;
+    }
+
+    /* 🔹 상품 목록 */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      padding: 24px;
+    }
+
+    .product {
+      text-align: center;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      padding: 10px;
+    }
+
+    .product img {
+      width: 80%;
+      height: auto;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 8px;
+    }
+
+    .product img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 10px 0 6px 0;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #c49b63;
+      margin: 0 0 10px 0;
+      font-weight: 600;
+    }
+
+    .buy-btn {
+      padding: 8px 14px;
+      background-color: #c49b63;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 500;
+    }
+
+    .buy-btn:hover {
+      background-color: #a77f4d;
+    }
+
+    /* 🔹 반응형: 모바일에서도 한 줄 2개 유지 */
+    @media (max-width: 480px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr); /* 한 줄 2개 유지 */
+        gap: 12px; /* 간격 줄임 */
+        padding: 16px;
+      }
+      .product img {
+        width: 95%; /* 모바일 화면에 맞춤 */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 메뉴바 -->
+  <nav class="navbar">
+    <ul>
+      <li>Home</li>
+      <li>About</li>
+      <li>Products</li>
+    </ul>
+  </nav>
+
+  <!-- 🔹 상품 목록 (12개) -->
+  <div class="container">
+    <div class="product" onclick="goToProduct(1)">
+      <img src="images/p1.png" alt="상품1">
+      <p class="product-name">럭셔리 향수 1</p>
+      <p class="product-price">₩120,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(2)">
+      <img src="images/p2.png" alt="상품2">
+      <p class="product-name">럭셔리 향수 2</p>
+      <p class="product-price">₩125,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(3)">
+      <img src="images/p3.jpg" alt="상품3">
+      <p class="product-name">럭셔리 향수 3</p>
+      <p class="product-price">₩130,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(4)">
+      <img src="images/p4.jpg" alt="상품4">
+      <p class="product-name">럭셔리 향수 4</p>
+      <p class="product-price">₩135,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(5)">
+      <img src="images/p5.jpg" alt="상품5">
+      <p class="product-name">럭셔리 향수 5</p>
+      <p class="product-price">₩140,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(6)">
+      <img src="images/p6.jpg" alt="상품6">
+      <p class="product-name">럭셔리 향수 6</p>
+      <p class="product-price">₩145,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(7)">
+      <img src="images/p7.jpg" alt="상품7">
+      <p class="product-name">럭셔리 향수 7</p>
+      <p class="product-price">₩150,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(8)">
+      <img src="images/p8.jpg" alt="상품8">
+      <p class="product-name">럭셔리 향수 8</p>
+      <p class="product-price">₩155,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(9)">
+      <img src="images/p9.jpg" alt="상품9">
+      <p class="product-name">럭셔리 향수 9</p>
+      <p class="product-price">₩160,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(10)">
+      <img src="images/p10.jpg" alt="상품10">
+      <p class="product-name">럭셔리 향수 10</p>
+      <p class="product-price">₩165,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(11)">
+      <img src="images/p11.jpg" alt="상품11">
+      <p class="product-name">럭셔리 향수 11</p>
+      <p class="product-price">₩170,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+    <div class="product" onclick="goToProduct(12)">
+      <img src="images/p12.jpg" alt="상품12">
+      <p class="product-name">럭셔리 향수 12</p>
+      <p class="product-price">₩175,000</p>
+      <button class="buy-btn">구매하기</button>
+    </div>
+  </div>
+
+  <script>
+    function goToProduct(id){
+      window.location.href = 'product.html?id=' + encodeURIComponent(id);
+    }
+  </script>
+
+</body>
+</html>
